@@ -1,0 +1,52 @@
+### Insert Data
+POST http://localhost:8181/api/players
+Content-Type: application/json
+Accept: application/json
+
+{
+  "id" : "P002",
+  "name" : "Burhan",
+  "region" : "Malaysia",
+  "team" : "UFC",
+  "age" : "20"
+}
+
+### Bad Request
+POST http://localhost:8181/api/players
+Content-Type: application/json
+Accept: application/json
+
+{
+  "id" : "",
+  "name" : "",
+  "region" : "Indonesia",
+  "team" : "",
+  "age" : "25"
+}
+
+### Get Data
+GET http://localhost:8181/api/players/P002
+Accept: application/json
+
+### Not Found
+GET http://localhost:8181/api/players/NOT
+Accept: application/json
+
+### Update Data
+PUT http://localhost:8181/api/players/P002
+Content-Type: application/json
+Accept: application/json
+
+{
+  "id" : "P002",
+  "name" : "Bmabang",
+  "region" : "Indonesia",
+  "team" : "Bandugn",
+  "age" : "27"
+}
+
+### Delete Data
+DELETE http://localhost:8181/api/players/P002
+Accept: application/json
+
+###
