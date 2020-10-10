@@ -8,9 +8,14 @@ import com.paralun.app.repository.PlayerRepository;
 import com.paralun.app.service.PlayerService;
 import com.paralun.app.validation.ValidationUtil;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class PlayerServiceImpl implements PlayerService {
@@ -69,6 +74,13 @@ public class PlayerServiceImpl implements PlayerService {
     public void delete(String id) {
         Player player = repository.findById(id).orElseThrow(NotFoundException::new);
         repository.delete(player);
+    }
+
+    @Override
+    public List<PlayerResponse> getAll(int page, int size) {
+        Page<Player> pages = repository.findAll(PageRequest.of(page, size, Sort.by(Sort.Order.desc("id"))));
+        List<Player> players = pages.get().collect(Collectors.toList());
+        return players.stream().map(this::convertPlayerToPlayerResponse).collect(Collectors.toList());
     }
 
     private PlayerResponse convertPlayerToPlayerResponse(Player player) {

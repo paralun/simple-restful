@@ -4,7 +4,7 @@ Content-Type: application/json
 Accept: application/json
 
 {
-  "id" : "P002",
+  "id" : "P010",
   "name" : "Burhan",
   "region" : "Malaysia",
   "team" : "UFC",
@@ -47,6 +47,14 @@ Accept: application/json
 
 ### Delete Data
 DELETE http://localhost:8181/api/players/P002
+Accept: application/json
+
+### Get All Data
+GET http://localhost:8181/api/players
+Accept: application/json
+
+### Get All Data with param
+GET http://localhost:8181/api/players?size=5&page=1
 Accept: application/json
 
 ###

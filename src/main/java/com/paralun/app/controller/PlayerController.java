@@ -8,6 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 public class PlayerController {
 
@@ -43,6 +45,19 @@ public class PlayerController {
         web.setCode(200);
         web.setMessage("ok");
         web.setData("response");
+        return web;
+    }
+
+    @GetMapping(value = "api/players", produces = MediaType.APPLICATION_JSON_VALUE)
+    public WebResponse<List<PlayerResponse>> getAllPlayer(
+            @RequestParam(value = "page", defaultValue = "0") int page,
+            @RequestParam(value = "size", defaultValue = "5") int size) {
+        List<PlayerResponse> responses = service.getAll(page, size);
+        WebResponse<List<PlayerResponse>> web = new WebResponse<>();
+        web.setCode(200);
+        web.setMessage("ok");
+        web.setData(responses);
+
         return web;
     }
 
